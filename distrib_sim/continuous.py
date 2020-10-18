@@ -10,7 +10,7 @@ from math import cos
 from math import sin
 from math import pi
 
-def uniform_gen(a: float, b: float) -> float:
+def uniform_continous_gen(a: float, b: float) -> float:
     u = random.random()
     return a + (b - a) * u
 
@@ -28,7 +28,8 @@ def gaussian_box_muller() -> float:
     u1 = random.random()
     u2 = random.random()
     x1 = sqrt(-2 * ln(u1)) * cos(2 * pi * u2)
-    x1 = sqrt(-2 * ln(u1)) * sin(2 * pi * u2)
+    x2 = sqrt(-2 * ln(u1)) * sin(2 * pi * u2)
+    return x1
 
 
 def random_sign():
@@ -51,7 +52,8 @@ def plot_exp(lambbda: float, n=1000):
 
 
 def plot_gaussian(n=1000):
-    data = [gaussian_accept_reject() for i in range(n)]
+    # data = [gaussian_accept_reject() for i in range(n)]
+    data = [gaussian_box_muller() for i in range(n)]
     sns.distplot(data)
     plt.show()
 
