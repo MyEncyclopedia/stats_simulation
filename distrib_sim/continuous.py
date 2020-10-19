@@ -45,6 +45,15 @@ def gaussian_accept_reject() -> float:
 
 
 
+def beta_cgen():
+    # a, b = 4, 3
+    while True:
+        y = random.random()
+        u = random.random()
+        if u <= 60 * pow(y, 3) * pow(1-y, 2) / 2.0736:
+            return y
+
+
 def plot_exp(lambbda: float, n=1000):
     data = [exp_gen(lambbda) for i in range(n)]
     sns.distplot(data)
