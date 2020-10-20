@@ -76,11 +76,14 @@ def binomial_exp_dgen(n: int, p: float) -> int:
     while total <= threshold:
         y = exp_gen(1.0)
         i += 1
+        # print(f'{i}, (n - i + 1) = {(n - i + 1)}')
+        if n - i + 1 == 0:
+            return n
         total += y / (n - i + 1)
     return i - 1
 
-def nagetive_binomial_dgen2(p: float) -> int:
-    pass
+def nagative_binomial_dgen(n: int, p: float) -> int:
+    return sum(geometric_d_gen(p) for _ in range(n))
 
 
 def poisson_dgen(lambdda: float) -> int:
@@ -99,12 +102,13 @@ def plot_bernoulli(p: float, n=1000):
     # data = [binomial_dgen(6, 0.8) for i in range(n)]
     # data = [binomial_geometric_dgen(6, 0.8) for i in range(n)]
     data = [binomial_exp_dgen(6, 0.8) for i in range(n)]
+    # data = [nagative_binomial_dgen(6, 0.8) for i in range(n)]
     sns.distplot(data)
     plt.show()
 
 
 if __name__ == "__main__":
-    # plot_bernoulli(0.3)
-    for _ in range(100):
-        print(categorical_dgen([0.1, 0.5, 0.15, 0.15, 0.1]))
+    plot_bernoulli(0.3)
+    # for _ in range(100):
+    #     print(categorical_dgen([0.1, 0.5, 0.15, 0.15, 0.1]))
 
