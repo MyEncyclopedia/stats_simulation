@@ -94,6 +94,22 @@ def poisson_dgen(lambdda: float) -> int:
 def poisson_dgen(lambdda: float) -> int:
     pass
 
+def plot_compare():
+    sns.set_style("white")
+
+    data1 = [binomial_exp_dgen(6, 0.8) for i in range(2000)]
+    data2 = [binomial_exp_dgen(6, 0.8) for i in range(2000)]
+    # data2 = [binomial_geometric_dgen(6, 0.8) for i in range(1000)]
+
+    # Plot
+    kwargs = dict(hist_kws={'alpha':.6}, kde_kws={'linewidth':2, 'shade': True})
+
+    plt.figure(figsize=(10,7), dpi= 80)
+    sns.distplot(data1, color="dodgerblue", label="Compact", **kwargs)
+    sns.distplot(data2, color="orange", label="SUV", **kwargs)
+    # plt.xlim(50,75)
+    plt.legend();
+    print('done')
 
 def plot_bernoulli(p: float, n=1000):
     # data = [bernoulli_gen(p) for i in range(n)]
@@ -108,7 +124,8 @@ def plot_bernoulli(p: float, n=1000):
 
 
 if __name__ == "__main__":
-    plot_bernoulli(0.3)
+    plot_compare()
+    # plot_bernoulli(0.3)
     # for _ in range(100):
     #     print(categorical_dgen([0.1, 0.5, 0.15, 0.15, 0.1]))
 
