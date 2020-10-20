@@ -1,5 +1,8 @@
 import random
 import math
+import bisect
+from typing import List
+
 import seaborn as sns
 import matplotlib.pyplot as plt
 from math import log2 as ln
@@ -23,6 +26,17 @@ def bernoulli_gen(p: float):
     assert 0 <= p <= 1
     u = random.random()
     return 1 if u <= p else 0
+
+
+def categorical_dgen(probs: List[float]) -> int:
+    assert abs(sum(probs) - 1.0) < 0.001
+    cum = probs.copy()
+
+    for i in range(1, len(cum)):
+        cum[i] = cum[i-1] + probs[i]
+
+    u = random.random()
+    return bisect.bisect(cum, u)
 
 
 def geometric_d_gen(p: float) -> int:
@@ -90,5 +104,7 @@ def plot_bernoulli(p: float, n=1000):
 
 
 if __name__ == "__main__":
-    plot_bernoulli(0.3)
+    # plot_bernoulli(0.3)
+    for _ in range(100):
+        print(categorical_dgen([0.1, 0.5, 0.15, 0.15, 0.1]))
 
