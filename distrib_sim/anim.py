@@ -4,7 +4,6 @@ import matplotlib.animation as animation
 import seaborn as sns
 
 from discrete import binomial_exp_dgen, uniform_discrete_gen, geometric_d_gen, categorical_dgen
-from discrete_hypergeometric_inv import hypergeometric
 
 n = 3000
 
@@ -60,6 +59,8 @@ def clt_possion(current):
     plt.ylim(0, 1)
 
 
+# from discrete_hypergeometric_inv import hypergeometric
+from discrete_hypergeometric import hypergeometric
 data = [hypergeometric(20, 7, 12) for _ in range(n)]
 def clt_hypergeometric(current):
     print(current)

@@ -1,4 +1,4 @@
-from random import random
+import random
 
 
 def bernoulli(p: float) -> int:
