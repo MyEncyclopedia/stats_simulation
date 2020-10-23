@@ -18,6 +18,7 @@ from continuous import exp_gen
 
 
 def uniform_discrete_gen(a: int, b: int) -> int:
+    assert a <= b
     u = random.random()
     return a + floor((b - a + 1) * u)
 
@@ -51,7 +52,7 @@ def geometric_d_gen2(p: float) -> int:
     return floor(ln(u) / ln(1-p))
 
 
-def hypergeometrix_dgen():
+def hypergeometric_dgen():
     # bisect
     pass
 
