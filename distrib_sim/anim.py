@@ -5,7 +5,7 @@ import seaborn as sns
 
 from discrete import binomial_exp_dgen, uniform_discrete_gen, geometric_d_gen, categorical_dgen
 
-n = 3000
+n = 5000
 
 # data = [binomial_exp_dgen(6, 0.8) for i in range(n)]
 # data = [geometric_d_gen(0.8) for i in range(n)]
@@ -60,9 +60,27 @@ def clt_possion(current):
 
 
 # from discrete_hypergeometric_inv import hypergeometric
-from discrete_hypergeometric import hypergeometric
-data = [hypergeometric(20, 7, 12) for _ in range(n)]
-def clt_hypergeometric(current):
+# from discrete_hypergeometric import hypergeometric
+# data = [hypergeometric(20, 7, 12) for _ in range(n)]
+# def clt_hypergeometric(current):
+#     print(current)
+#     # if animation is at the last frame, stop it
+#     plt.cla()
+#     if current == n:
+#         a.event_source.stop()
+#
+#     min_x = 0
+#     max_x = 8
+#     # ax = sns.distplot(data[0: 5* current], hist=True, bins=np.arange(min_x + 0.5, max_x+2, 1), kde_kws={'bw':1}, hist_kws={"histtype": "step", "linewidth": 3, "alpha": 0.5, "color": "g"})
+#     ax = sns.distplot(data[0: 1* current], hist=True, bins=np.arange(min_x + 0.5, max_x+2, 1), kde_kws={'bw':1}, hist_kws={"linewidth": 3, "alpha": 0.5, "color": "g"})
+#     plt.xticks(np.arange(min_x, max_x + 2, 1))
+#     plt.xlim(min_x, max_x+2)
+#     plt.ylim(0, 1)
+
+# from discrete_nagative_binomial import negative_binomial
+from discrete_nagative_binomial_from_geometric import negative_binomial
+data = [negative_binomial(5, 0.5)  for _ in range(n)]
+def clt_negbinomial(current):
     print(current)
     # if animation is at the last frame, stop it
     plt.cla()
@@ -70,14 +88,13 @@ def clt_hypergeometric(current):
         a.event_source.stop()
 
     min_x = 0
-    max_x = 8
+    max_x = 16
     # ax = sns.distplot(data[0: 5* current], hist=True, bins=np.arange(min_x + 0.5, max_x+2, 1), kde_kws={'bw':1}, hist_kws={"histtype": "step", "linewidth": 3, "alpha": 0.5, "color": "g"})
-    ax = sns.distplot(data[0: 1* current], hist=True, bins=np.arange(min_x + 0.5, max_x+2, 1), kde_kws={'bw':1}, hist_kws={"linewidth": 3, "alpha": 0.5, "color": "g"})
+    ax = sns.distplot(data[0: 20 * current], hist=True, bins=np.arange(min_x + 0.5, max_x+2, 1), kde_kws={'bw':1}, hist_kws={"linewidth": 3, "alpha": 0.5, "color": "g"})
     plt.xticks(np.arange(min_x, max_x + 2, 1))
     plt.xlim(min_x, max_x+2)
     plt.ylim(0, 1)
 
-
 fig = plt.figure()
-a = animation.FuncAnimation(fig, clt_hypergeometric, interval=1)
+a = animation.FuncAnimation(fig, clt_negbinomial, interval=1)
 plt.show()
