@@ -1,6 +1,5 @@
 from discrete_bernoulli import bernoulli
 
-
 def negative_binomial(r: int, p: float) -> int:
     failures = 0
     while r:

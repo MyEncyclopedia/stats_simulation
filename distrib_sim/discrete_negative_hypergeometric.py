@@ -1,18 +1,17 @@
 from discrete_bernoulli import bernoulli
 
 
-# todo has bug
-def negative_hypergeometric(M: int, n: int, r: int) -> int:
-    x = M - n
-    failures = 0
-    while r:
-        success = bernoulli(n / (n + x))
+def negative_hypergeometric(N: int, K_success_num: int, r_fail_times: int) -> int:
+    fail_num = N - K_success_num
+    succ_trials = 0
+    while r_fail_times:
+        success = bernoulli(K_success_num / (K_success_num + fail_num))
         if success:
-            r -= 1
-            n -= 1
-            if n == 0:
-                return failures
+            K_success_num -= 1
+            succ_trials += 1
+            if K_success_num == 0: # no more success elements
+                return succ_trials
         else:
-            failures += 1
-            x -= 1
-    return success
+            fail_num -= 1
+            r_fail_times -= 1
+    return succ_trials
