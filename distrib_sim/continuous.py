@@ -68,6 +68,6 @@ def plot_gaussian(n=1000):
 
 
 if __name__ == "__main__":
-    # plot_exp(1.0)
-    plot_gaussian(n=5000)
+    plot_exp(1.0, n=100)
+    # plot_gaussian(n=5000)
 
