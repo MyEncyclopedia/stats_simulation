@@ -13,9 +13,10 @@ def normal_box_muller_polar():
         s = u * u + v * v
         if s >= 1.0 or s == 0.0:
             continue
-        z0 = u * sqrt(-2 * log2(s) / s)
-        z1 = v * sqrt(-2 * log2(s) / s)
-        return z0, z1
+        return sqrt(-2*log2(s)), s
+        # z0 = u * sqrt(-2 * log2(s) / s)
+        # z1 = v * sqrt(-2 * log2(s) / s)
+        # return z0, z1
 
 
 def normal_box_muller():
@@ -55,19 +56,29 @@ def plot_2d(X, Y):
 
 
 def plot_1d(X):
-    n, bins, patches = plt.hist(X, 50, density=True, facecolor='g', alpha=0.75)
+    import seaborn as sns
+    plt.rcParams.update({
+        "text.usetex": True,
+        "font.family": "sans-serif",
+        "font.sans-serif": ["Helvetica"]})
+    # n, bins, patches = plt.hist(X, 100, density=True, facecolor='g', alpha=0.75, normed=True)
+    sns.distplot(X, hist=True, kde=True, bins=100, color='darkblue',
+                 hist_kws={'edgecolor': 'black'},
+                 kde_kws={'linewidth': 4})
+    # plt.title('PDF $\sqrt{-2 \ln(s)}$')
+    plt.title('PDF $s=R^2$')
     plt.show()
 
 
 if __name__ == "__main__":
     X, Y = [], []
-    for i in range(300):
-        # x, y = normal_box_muller_polar()
-        x, y = normal_box_muller()
+    for i in range(50000):
+        x, y = normal_box_muller_polar()
+        # x, y = normal_box_muller()
         X.append(x)
         Y.append(y)
 
     # plot_2d(X, Y)
-    plot_1d(X)
+    plot_1d(Y)
 
 
